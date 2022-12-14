@@ -27,3 +27,29 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# lock file 
+.terraform.lock.hcl
+
+# license files
+*.rli
+
+# Ignore apple folder
+.DS_Store
+
+# Ignore .pem, .crt, .key files
+*.pem
+*.crt
+*.key
+
+# Ignore debian packages
+*.deb
+
+# replicated installer
+replicated.tar.gz
+
+# airgap files
+*.airgap
+
+# zip files
+*.zip
