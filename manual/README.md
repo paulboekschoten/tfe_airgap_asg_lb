@@ -291,7 +291,9 @@ Select `Instances` and provide a name.
 ![](media/2022-12-07-14-48-44.png)  
 Select protocol `HTTPS` and provide port number `8800`.  
 Select the VPC.  
-![](media/2022-12-07-14-50-42.png)  
+![](media/2022-12-14-15-38-59.png)  
+Expand `Advanced health check settings`.  
+Under `Success codes` add `,301,302`.
 Click `Next`.  
 
 No targets needed, so click `Create target group`.  
