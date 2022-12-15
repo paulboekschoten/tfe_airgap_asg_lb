@@ -1,0 +1,3 @@
+region                  = "eu-west-3"              # AWS region to deploy in
+environment_name        = "tfe-airgap"             # Name of the environment, used in naming of resources
+vpc_cidr                = "10.200.0.0/16"          # The ip range for the VPC, subnet CIDR are calculated based on this.
