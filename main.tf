@@ -91,3 +91,11 @@ resource "aws_default_route_table" "tfe" {
     Name = "${var.environment_name}-rtb"
   }
 }
+
+# create public ip
+resource "aws_eip" "eip_tfe" {
+  vpc = true
+  tags = {
+    Name = "${var.environment_name}-eip"
+  }
+}
