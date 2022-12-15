@@ -68,3 +68,26 @@ resource "aws_subnet" "tfe_private2" {
     Name = "${var.environment_name}-subnet-private2"
   }
 }
+
+# internet gateway
+resource "aws_internet_gateway" "tfe_igw" {
+  vpc_id = aws_vpc.tfe.id
+
+  tags = {
+    Name = "${var.environment_name}-igw"
+  }
+}
+
+# add igw to default vpc route table
+resource "aws_default_route_table" "tfe" {
+  default_route_table_id = aws_vpc.tfe.default_route_table_id
+
+  route {
+    cidr_block = local.all_ips
+    gateway_id = aws_internet_gateway.tfe_igw.id
+  }
+
+  tags = {
+    Name = "${var.environment_name}-rtb"
+  }
+}
