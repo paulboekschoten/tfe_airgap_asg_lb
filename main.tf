@@ -99,3 +99,17 @@ resource "aws_eip" "eip_tfe" {
     Name = "${var.environment_name}-eip"
   }
 }
+
+# nat gateway
+resource "aws_nat_gateway" "tfe_nat" {
+  allocation_id = aws_eip.eip_tfe.id
+  subnet_id     = aws_subnet.tfe_public1.id
+
+  tags = {
+    Name = "${var.environment_name}-nat"
+  }
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.tfe_igw]
+}
