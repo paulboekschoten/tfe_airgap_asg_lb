@@ -95,10 +95,6 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - Click on the open button to go to TFE of go to the `tfe_login` url.  
 
 # TODO
-- [ ] Create manually
-- [ ] Add diagram
-- [ ] Create VPC
-- [ ] Create Subnets
 - [ ] Create Internet gateway
 - [ ] Create EIP
 - [ ] Create NAT gateway
@@ -125,3 +121,7 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - [ ] Documentation
 
 # DONE
+- [x] Create manually
+- [x] Add diagram
+- [x] Create VPC
+- [x] Create Subnets
