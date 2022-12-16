@@ -88,8 +88,20 @@ resource "aws_default_route_table" "tfe" {
   }
 
   tags = {
-    Name = "${var.environment_name}-rtb"
+    Name = "${var.environment_name}-rtb-public"
   }
+}
+
+# associate public subnet 1 with public route table
+resource "aws_route_table_association" "tfe_public1" {
+  subnet_id      = aws_subnet.tfe_public1.id
+  route_table_id = aws_default_route_table.tfe.id
+}
+
+# associate public subnet 2 with public route table
+resource "aws_route_table_association" "tfe_public2" {
+  subnet_id      = aws_subnet.tfe_public2.id
+  route_table_id = aws_default_route_table.tfe.id
 }
 
 # create public ip
@@ -112,4 +124,30 @@ resource "aws_nat_gateway" "tfe_nat" {
   # To ensure proper ordering, it is recommended to add an explicit dependency
   # on the Internet Gateway for the VPC.
   depends_on = [aws_internet_gateway.tfe_igw]
+}
+
+# private route table
+resource "aws_route_table" "tfe_private" {
+  vpc_id = aws_vpc.tfe.id
+
+  route {
+    cidr_block = local.all_ips
+    nat_gateway_id = aws_nat_gateway.tfe_nat.id
+  }
+
+  tags = {
+    Name = "${var.environment_name}-rtb-private"
+  }
+}
+
+# associate private subnet 1 with private route table
+resource "aws_route_table_association" "tfe_private1" {
+  subnet_id      = aws_subnet.tfe_private1.id
+  route_table_id = aws_route_table.tfe_private.id
+}
+
+# associate private subnet 2 with private route table
+resource "aws_route_table_association" "tfe_private2" {
+  subnet_id      = aws_subnet.tfe_private2.id
+  route_table_id = aws_route_table.tfe_private.id
 }
