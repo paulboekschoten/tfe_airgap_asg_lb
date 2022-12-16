@@ -17,6 +17,10 @@ provider "aws" {
   region = var.region
 }
 
+provider "acme" {
+  server_url = "https://acme-v02.api.letsencrypt.org/directory"
+}
+
 # vpc
 resource "aws_vpc" "tfe" {
   cidr_block = var.vpc_cidr
@@ -150,4 +154,24 @@ resource "aws_route_table_association" "tfe_private1" {
 resource "aws_route_table_association" "tfe_private2" {
   subnet_id      = aws_subnet.tfe_private2.id
   route_table_id = aws_route_table.tfe_private.id
+}
+
+# key pair
+# RSA key of size 4096 bits
+resource "tls_private_key" "rsa-4096" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+# key pair in aws
+resource "aws_key_pair" "tfe" {
+  key_name   = "${var.environment_name}-keypair"
+  public_key = tls_private_key.rsa-4096.public_key_openssh
+}
+
+# store private ssh key locally
+resource "local_file" "tfesshkey" {
+  content         = tls_private_key.rsa-4096.private_key_pem
+  filename        = "${path.module}/tfesshkey.pem"
+  file_permission = "0600"
 }
