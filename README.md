@@ -95,7 +95,6 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - Click on the open button to go to TFE of go to the `tfe_login` url.  
 
 # TODO
-- [ ] Create private rout table
 - [ ] Create Key pair
 - [ ] Create security group
 - [ ] Create a security group rules
@@ -125,3 +124,4 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - [x] Change default Route Table
 - [x] Create EIP
 - [x] Create NAT gateway
+- [x] Create private route table
