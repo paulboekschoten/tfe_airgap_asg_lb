@@ -95,9 +95,6 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - Click on the open button to go to TFE of go to the `tfe_login` url.  
 
 # TODO
-- [ ] Create Key pair
-- [ ] Create security group
-- [ ] Create a security group rules
 - [ ] Create DNS record
 - [ ] Create valid certificate
 - [ ] Create S3 buckets
@@ -125,3 +122,6 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - [x] Create EIP
 - [x] Create NAT gateway
 - [x] Create private route table
+- [x] Create Key pair
+- [x] Create security group
+- [x] Create a security group rules
