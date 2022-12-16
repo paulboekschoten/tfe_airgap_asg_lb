@@ -95,13 +95,13 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - Click on the open button to go to TFE of go to the `tfe_login` url.  
 
 # TODO
-- [ ] Create DNS record
-- [ ] Create valid certificate
-- [ ] Create S3 buckets
 - [ ] Create PostgreSQL database
 - [ ] Create Target groups
 - [ ] Create Load balancer
+- [ ] Create DNS record
+- [ ] Create valid certificate
 - [ ] Create Listeners
+- [ ] Copy files to s3 file bucket
 - [ ] Create Launch template
   - [ ] Create settings.json
   - [ ] Create replicated.conf
@@ -125,3 +125,4 @@ tfe_login = "https://tfe-airgap-paul.tf-support.hashicorpdemo.com"
 - [x] Create Key pair
 - [x] Create security group
 - [x] Create a security group rules
+- [x] Create S3 buckets
