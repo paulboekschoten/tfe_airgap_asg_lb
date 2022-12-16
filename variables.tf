@@ -36,3 +36,8 @@ variable "postgresql_port" {
   type        = number
   default     = 5432
 }
+
+variable "postgresql_password" {
+  description = "PostgreSQL password."
+  type        = string
+}
