@@ -175,3 +175,13 @@ resource "local_file" "tfesshkey" {
   filename        = "${path.module}/tfesshkey.pem"
   file_permission = "0600"
 }
+
+# security group
+resource "aws_security_group" "tfe_sg" {
+  name   = "${var.environment_name}-sg"
+  vpc_id = aws_vpc.tfe.id
+
+  tags = {
+    Name = "${var.environment_name}-sg"
+  }
+}
