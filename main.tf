@@ -278,3 +278,34 @@ resource "aws_s3_bucket_public_access_block" "tfe" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+# postgresql rds
+resource "aws_db_instance" "tfe" {
+  identifier          = "${var.environment_name}-postgres"
+  allocated_storage   = 50
+  db_name             = "tfe"
+  engine              = "postgres"
+  engine_version      = "14.5"
+  instance_class      = "db.m5.large"
+  username            = "postgres"
+  password            = var.postgresql_password
+  skip_final_snapshot = true
+
+  multi_az               = false
+  vpc_security_group_ids = [aws_security_group.tfe_sg.id]
+  db_subnet_group_name   = aws_db_subnet_group.tfe.name
+
+  tags = {
+    Name = "${var.environment_name}-postgres"
+  }
+}
+
+# database subnet group
+resource "aws_db_subnet_group" "tfe" {
+  name       = "${var.environment_name}-subnetgroup"
+  subnet_ids = [aws_subnet.tfe_private1.id, aws_subnet.tfe_private2.id]
+
+  tags = {
+    Name = "${var.environment_name}-subnetgroup"
+  }
+}
