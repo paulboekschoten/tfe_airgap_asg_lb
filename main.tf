@@ -240,3 +240,41 @@ resource "aws_security_group_rule" "allow_all_outbound" {
   protocol    = local.any_protocol
   cidr_blocks = [local.all_ips]
 }
+
+# s3 bucket
+resource "aws_s3_bucket" "tfe_files" {
+  bucket = "${var.environment_name}-filesbucket"
+
+  tags = {
+    Name = "${var.environment_name}-filesbucket"
+  }
+}
+
+# disable all public bucket access
+resource "aws_s3_bucket_public_access_block" "tfe_files" {
+  bucket = aws_s3_bucket.tfe_files.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+# s3 bucket
+resource "aws_s3_bucket" "tfe" {
+  bucket = "${var.environment_name}-bucket"
+
+  tags = {
+    Name = "${var.environment_name}-bucket"
+  }
+}
+
+# disable all public bucket access
+resource "aws_s3_bucket_public_access_block" "tfe" {
+  bucket = aws_s3_bucket.tfe.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
